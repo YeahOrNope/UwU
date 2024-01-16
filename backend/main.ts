@@ -30,8 +30,9 @@ router.post("/dict/get/:key", (ctx) => {
   CacheStorage.response.body = dict{key}
 })
 
+const kv = await Deno.openKv()
 router.post("/register", (cts) => {
-  
+  const body = ctx.request.body({type: "json"})
 })
 
 app.use(Router.routes())
