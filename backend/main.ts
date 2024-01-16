@@ -9,4 +9,7 @@ app.use((ctx) => {
   ctx.response.body = "Hello World!";
 });
 
+app.use(Router.routes())
+app.use(Router.allowedMethods())
+
 await app.listen({ port: 8000 });
