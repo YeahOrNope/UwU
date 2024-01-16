@@ -10,6 +10,13 @@ router.get("/", (ctx) => {
   ctx.response.body = "Bober sus hihihi"
 })
 
+router.get("/add/:a/:b", (ctx) => {
+  const {a, b } = ctx.params
+  console.log(a,b)
+  const value = Number(a)+Number(b)
+  ctx.response.body = value
+})
+
 app.use(Router.routes())
 app.use(Router.allowedMethods())
 
