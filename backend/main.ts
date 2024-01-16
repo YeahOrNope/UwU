@@ -31,8 +31,14 @@ router.post("/dict/get/:key", (ctx) => {
 })
 
 const kv = await Deno.openKv()
-router.post("/register", (cts) => {
+router.post("/register", async (ctx) => {
   const body = ctx.request.body({type: "json"})
+  try {
+    const body = context.request.body({ type: "json"})
+    const credentials = await body.value
+  } catch {
+    context.response.status = Status.Unauthorized
+  }
 })
 
 app.use(Router.routes())
