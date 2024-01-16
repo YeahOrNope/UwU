@@ -4,9 +4,10 @@ import {Application, Router } from "https://deno.land/x/oak@v12.6.2/mod.ts"
 //})
 
 const app = new Application();
+const router = new Router();
 
 app.use((ctx) => {
-  ctx.response.body = "Hello World!";
+  ctx.response.body = "Bober sus hihihi";
 });
 
 app.use(Router.routes())
