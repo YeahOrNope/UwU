@@ -13,9 +13,19 @@ router.get("/", (ctx) => {
 router.get("/add/:a/:b", (ctx) => {
   const {a, b } = ctx.params
   console.log(a,b)
-  const value = Number(a)+Number(b)
-  ctx.response.body = value
+  ctx.response.status = Status.NoConten
 })
+
+const dict: {[Key: string]:string } = {}
+//const dict: ecord<string, string> = {}
+
+router.post("/dict/set/:key/:value", (ctx) => {
+  const {key, value } = ctx.params
+  dict [key] = value
+  ctx.response.status = Status.NoContent
+})
+
+router.post("/dict/get/:key")
 
 app.use(Router.routes())
 app.use(Router.allowedMethods())
