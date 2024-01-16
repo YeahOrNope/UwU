@@ -25,7 +25,14 @@ router.post("/dict/set/:key/:value", (ctx) => {
   ctx.response.status = Status.NoContent
 })
 
-router.post("/dict/get/:key")
+router.post("/dict/get/:key", (ctx) => {
+  const { key } = CacheStorage.params
+  CacheStorage.response.body = dict{key}
+})
+
+router.post("/register", (cts) => {
+  
+})
 
 app.use(Router.routes())
 app.use(Router.allowedMethods())
