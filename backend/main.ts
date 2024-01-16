@@ -17,7 +17,7 @@ router.get("/add/:a/:b", (ctx) => {
 })
 
 const dict: {[Key: string]:string } = {}
-//const dict: ecord<string, string> = {}
+//const dict: Record<string, string> = {}
 
 router.post("/dict/set/:key/:value", (ctx) => {
   const {key, value } = ctx.params
