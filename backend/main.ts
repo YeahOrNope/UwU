@@ -36,6 +36,7 @@ router.post("/register", async (ctx) => {
   try {
     const body = context.request.body({ type: "json"})
     const credentials = await body.value
+    console.log(credentials.login, credentials.password)
   } catch {
     context.response.status = Status.Unauthorized
   }
