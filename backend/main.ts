@@ -38,12 +38,6 @@ router.post("/register", async (ctx) => {
       }
       const key = ["users", credentials.login]
       const entry = await kv.get(key);
-
-
-
-
-
-      
       if (entry.versionstamp) {
         ctx.response.status = Status.Unauthorized
         return;
@@ -54,10 +48,15 @@ router.post("/register", async (ctx) => {
       ctx.response.status = Status.Unauthorized
   }
 }).post("/login", async (ctx) => {
-
+  try {
+  const body = ctx.request.body({ type: "json" })
+  const credentials = await body.value
+  const key = ["users", credentials.login]
+  const entry = await kv.get<{ password: string }>(key);
+  } catch {
+    ctx.response.status = Status.Unauthorized
+  }
 })
-
-
 
 app.use(router.routes())
 app.use(router.allowedMethods())
