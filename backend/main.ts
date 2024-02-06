@@ -32,7 +32,7 @@ router.post("/register", async (ctx) => {
   try {
       const body = ctx.request.body({ type: "json" })
       const credentials = await body.value
-
+      //czy hasło i login istnieja
       if (!credentials.login || !credentials.password) {
         ctx.response.status = Status.BadRequest
       }
@@ -51,8 +51,20 @@ router.post("/register", async (ctx) => {
   try {
   const body = ctx.request.body({ type: "json" })
   const credentials = await body.value
+
+  if (!credentials.login || !credentials.password) {
+    ctx.response.status = Status.BadRequest
+  }
+
   const key = ["users", credentials.login]
   const entry = await kv.get<{ password: string }>(key);
+
+  if(entry.value?.password === credentials.password) {
+    ctx.response.status = Status.NoContent
+  } else {
+    ctx.response.status = Status.Unauthorized
+  }
+    
   } catch {
     ctx.response.status = Status.Unauthorized
   }
