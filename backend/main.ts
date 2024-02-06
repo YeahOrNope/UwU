@@ -28,6 +28,7 @@ router.get("/dict/get/:key", (ctx) => {
 })
 
 const kv = await Deno.openKv()
+
 router.post("/register", async (ctx) => {
   try {
       const body = ctx.request.body({ type: "json" })
