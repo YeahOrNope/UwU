@@ -1,4 +1,4 @@
-import { Application, Router } from "https://deno.land/x/oak@v12.6.2/mod.ts"
+import { Application, Router } from "https://deno.land/x/oak@v12.6.2/mod.ts";
 import { Status } from "https://deno.land/x/oak_commons@0.4.0/status.ts";
 
 const app = new Application();
@@ -28,21 +28,38 @@ router.get("/dict/get/:key", (ctx) => {
 })
 
 const kv = await Deno.openKv()
-
 router.post("/register", async (ctx) => {
   try {
       const body = ctx.request.body({ type: "json" })
       const credentials = await body.value
+
+      if (!credentials.login || !credentials.password) {
+        ctx.response.status = Status.BadRequest
+      }
       const key = ["users", credentials.login]
+      const entry = await kv.get(key);
+
+
+
+
+
+      
+      if (entry.versionstamp) {
+        ctx.response.status = Status.Unauthorized
+        return;
+      }
       const value = { password: credentials.password }
       await kv.set(key, value)
-      ctx.response.status = Status.NoContent
   } catch {
       ctx.response.status = Status.Unauthorized
   }
+}).post("/login", async (ctx) => {
+
 })
+
+
 
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-await app.listen({ port: 8000 });
+await app.listen({ port: 8000 })
