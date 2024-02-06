@@ -60,6 +60,7 @@ router.post("/register", async (ctx) => {
   const entry = await kv.get<{ password: string }>(key);
 
   if(entry.value?.password === credentials.password) {
+    //tymczasowo
     ctx.response.status = Status.NoContent
   } else {
     ctx.response.status = Status.Unauthorized
