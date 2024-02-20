@@ -3,7 +3,7 @@
 
   let a: number = 0;
   let b: number = 0;
-  
+
   async function sendRequest() {
     const res = await fetch("/api", {
       method: "GET",
@@ -26,11 +26,6 @@
 </script>
 
 <main>
-  {response}
-
-  <button on:click={() => addNumbers(2,4)}>Send request</button>
-  {response}
-
   A = <input type="number" bind:value={a} />
   B = <input type="number" bind:value={b} />
   <button on:click={async () => {
