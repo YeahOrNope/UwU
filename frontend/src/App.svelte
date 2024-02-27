@@ -72,7 +72,7 @@
   <div>
     <!-- Rejestracja -->
     Login: <input bind:value={newLogin} />
-    Password: <input bind:value={newPassword} />
+    Password: <input type="password" bind:value={newPassword} />
     <button on:click={registerUser}>Register</button>
   </div>
 
@@ -80,7 +80,7 @@
   <div>
     <!-- Logowanie -->
     Login: <input bind:value={login} />
-    Password: <input bind:value={password} />
+    Password: <input type="password" bind:value={password} />
     <button on:click={loginUser}>Login</button>
   </div>
 </main>
