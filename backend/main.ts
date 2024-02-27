@@ -51,7 +51,7 @@ router.post("/register", async (ctx) => {
       return;
     }
 
-    const value = { password: credentials.password }
+    const value = { password: await hash(credentials.password) }
     await kv.set(key, value)
     ctx.response.status = Status.NoContent
   } catch {
@@ -70,10 +70,9 @@ router.post("/register", async (ctx) => {
 
     const key = ["users", credentials.login]
     const entry = await kv.get<{ password: string }>(key);
-
     // później przejdziemy do haszowania haseł, omówienia mechanizmu korzystania
     // z funkcji udostępnionych przez Deno w tym celu
-    if (entry.value?.password === credentials.password) {
+    if (stored_password && await verify(stored_password, credentials.password)) {
       // tymczasowo
       const sessionId = crypto.randomUUID();
       const key = ["sessions", sessionId];
