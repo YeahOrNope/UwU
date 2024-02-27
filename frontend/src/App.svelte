@@ -21,7 +21,7 @@
   async function addNumbers(a: number, b: number) {
 
     const res = await fetch(`/api/add/${a}/${b}`, {
-      method: "GET";
+      method: "GET",
     })
     return res.text();
   }
@@ -62,19 +62,25 @@
     A = <input type="number" bind:value={a} />
     B = <input type="number" bind:value={b} />
     <button on:click={async () => {
-      response = await addNumbers(a,b);
-    }} >Send request</button>
-
+      response = await addNumbers(a, b);
+    }}>Send request</button>
+  
     A + B = {response}
   </div>
+
+  Rejestracja
   <div>
-    Login: <input bind:value={newLogin}/>
-    Password: <input bind:value={newPassword}/>
+    <!-- Rejestracja -->
+    Login: <input bind:value={newLogin} />
+    Password: <input bind:value={newPassword} />
     <button on:click={registerUser}>Register</button>
   </div>
+
+  Logowanie
   <div>
-    Login: <input bind:value={login}/>
-    Password: <input bind:value={password}/>
+    <!-- Logowanie -->
+    Login: <input bind:value={login} />
+    Password: <input bind:value={password} />
     <button on:click={loginUser}>Login</button>
   </div>
 </main>

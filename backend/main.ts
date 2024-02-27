@@ -4,7 +4,7 @@ import { Status } from "https://deno.land/x/oak_commons@0.4.0/status.ts";
 const app = new Application();
 const router = new Router();
 
-donst SESSION_DURATION = 1000 * 60 * 10;
+const SESSION_DURATION = 1000 * 60 * 10;
 
 router.get("/", (ctx) => {
   ctx.response.body = "Hi mom!"
@@ -74,7 +74,7 @@ router.post("/register", async (ctx) => {
     // z funkcji udostępnionych przez Deno w tym celu
     if (entry.value?.password === credentials.password) {
       // tymczasowo
-      const sessionId = crypto,randomUUID();
+      const sessionId = crypto.randomUUID();
       const key = ["sessions", sessionId];
       const value = credentials.login;
       await kv.set(key, value, { expireIn: SESSION_DURATION });
