@@ -1,5 +1,5 @@
 import { Application, Router } from "https://deno.land/x/oak@v12.6.2/mod.ts";
-import { hash, verify } from "https://deno.land/x/argon2_ffi@v1.0.4/mod.ts";
+import { hash, verify } from "https://deno.land/x/argon2_ffi/mod.ts";
 import { Status } from "https://deno.land/x/oak_commons@0.4.0/status.ts";
 
 const app = new Application();
@@ -70,8 +70,10 @@ router.post("/register", async (ctx) => {
 
     const key = ["users", credentials.login]
     const entry = await kv.get<{ password: string }>(key);
+    const stored_password = entry.value?.password;
     // później przejdziemy do haszowania haseł, omówienia mechanizmu korzystania
     // z funkcji udostępnionych przez Deno w tym celu
+    
     if (stored_password && await verify(stored_password, credentials.password)) {
       // tymczasowo
       const sessionId = crypto.randomUUID();
