@@ -1,4 +1,5 @@
 import { Application, Router } from "https://deno.land/x/oak@v12.6.2/mod.ts";
+import { hash, verify } from "https://deno.land/x/argon2_ffi@v1.0.4/mod.ts";
 import { Status } from "https://deno.land/x/oak_commons@0.4.0/status.ts";
 
 const app = new Application();
